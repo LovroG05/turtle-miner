@@ -19,17 +19,19 @@ enderchest_slot = 16
 -- gor y+ dol y-
 
 function refuel()
-    previous_slot = turtle.getSelectedSlot()
-    for i=1, 16, 1 do
-        turtle.select(i)
-        data = turtle.getItemDetail()
-        if data then
-            if data.name == "minecraft:coal" then
-                turtle.refuel(data.count)
+    if turtle.getFuelLevel() < 2000 then
+        previous_slot = turtle.getSelectedSlot()
+        for i=1, 16, 1 do
+            turtle.select(i)
+            data = turtle.getItemDetail()
+            if data then
+                if data.name == "minecraft:coal" then
+                    turtle.refuel(data.count)
+                end
             end
         end
+        turtle.select(previous_slot)
     end
-    turtle.select(previous_slot)
 end
 
 function updateFacingLeft()
